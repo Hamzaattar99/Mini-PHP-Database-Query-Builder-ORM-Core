@@ -1,0 +1,16 @@
+{
+    "name": "h-mzaa/mini_framework",
+    "autoload": {
+        "psr-4": {
+            "HMzaa\\MiniFramework\\": "src/",
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hamza Al-attar",
+            "email": "hamzahsuam2050@gmail.com"
+        }
+    ],
+    "require": {}
+}
