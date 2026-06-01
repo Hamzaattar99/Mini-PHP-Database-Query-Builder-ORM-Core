@@ -61,7 +61,7 @@ var_dump($result); */
 var_dump($result);*/
 
 // ****this a test to insert specific values into another table ****
-DB::table('products')->insert([
+/*DB::table('products')->insert([
     'title' => 'Laptop',
     'price' => 1500,
     'stock' => 10
@@ -69,12 +69,122 @@ DB::table('products')->insert([
 
 print_r(
     DB::table('products')->get()
-);
+);*/
 
-//echo "<pre>";
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->orderBy('id', 'DESC')
+    ->get();*/
 
-//print_r($users);
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->limit(5)
+    ->get();*/
 
-//echo "</pre>";
+//***************************************************************************** */
+/*$users = DB::table('products')
+    ->where('price', '<', 1000)
+    ->get();*/
+
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->where('username', 'LIKE', '%a%')
+    ->get();*/
+
+
+//***************************************************************************** */
+/*$users = DB::table('products')
+    ->where('price', '<', 100)
+    ->orWhere('stock', '>', 10)
+    ->get();*/
+
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->join(
+        'posts',
+        'users.id',
+        '=',
+        'posts.user_id'
+    )
+    ->get();*/
+
+//***************************************************************************** */
+/*$users =
+DB::table('users')
+    ->groupBy('i')
+    ->get();*/
+
+//***************************************************************************** */
+  /*$users  = DB::table('users')
+    ->select('username')
+    ->selectRaw('COUNT(id) as total_users')
+    ->groupBy('username')
+    ->get();*/
+
+//***************************************************************************** */
+/*$users  = DB::table('users')
+    ->count();*/
+
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->where('username', '=', 'HOHO')
+    ->where('id', '=', 5)
+    ->count(); */
+
+//***************************************************************************** */
+/*var_dump(
+    DB::table('users')
+        ->where(
+            'username',
+            '=',
+            'ali123'
+        )
+        ->exists()
+);*/
+
+
+//***************************************************************************** */
+/*$users = DB::table('users')
+    ->enableDebug()
+    ->where('id', '=', 2)
+    ->get();*/
+
+//***************************************************************************** */
+/*DB::clearQueryLog();
+
+DB::table('products')->get();
+
+print_r(DB::getQueryLog()); */
+
+//***************************************************************************** */
+/*DB::beginTransaction();
+
+try {
+
+    DB::table('users')->insert([
+        'name' => 'Hamza'
+    ]);
+
+    DB::table('users')->insert([
+        'name' => 'Ali'
+    ]);
+
+    DB::commit();
+
+} catch (Exception $e) {
+
+    DB::rollback();
+}*/
+
+//***************************************************************************** */
+$result = DB::table('users')
+    ->paginate(5, 1);
+
+
+ echo "<pre>";
+
+ print_r($result);
+
+ echo "</pre>";
 
 ?>
