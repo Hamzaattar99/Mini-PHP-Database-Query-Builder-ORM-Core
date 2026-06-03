@@ -1,0 +1,55 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use App\Core\Console\Kernel;
+
+use App\Core\Console\Commands\MigrateCommand;
+use App\Core\Console\Commands\RollbackCommand;
+use App\Core\Console\Commands\StatusCommand;
+use App\Core\Console\Commands\MakeMigrationCommand;
+use App\Core\Console\Commands\ResetCommand;
+use App\Core\Console\Commands\RefreshCommand;
+use App\Core\Console\Commands\FreshCommand;
+
+$kernel = new Kernel();
+
+$kernel->register(
+    new MigrateCommand()
+);
+
+$kernel->register(
+    new RollbackCommand()
+);
+
+$kernel->register(
+    new StatusCommand()
+);
+
+$kernel->register(
+    new MakeMigrationCommand()
+);
+
+$kernel->register(
+    new ResetCommand()
+);
+
+$kernel->register(
+    new RefreshCommand()
+);
+
+$kernel->register(
+    new FreshCommand()
+);
+
+$command = $argv[1] ?? null;
+$arguments = array_slice($argv, 2);
+
+if (!$command) {
+
+    $kernel->list();
+
+    exit;
+}
+
+$kernel->run($command, $arguments);

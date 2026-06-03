@@ -3,6 +3,8 @@
 require '../vendor/autoload.php';
 
 use App\Core\Database\DB;
+use App\Core\Database\Schema;
+use App\Core\Database\Table;
 
 // ****this a test to get all rows from all columns****
 //$users = DB::table("users")->get(); 
@@ -177,14 +179,139 @@ try {
 }*/
 
 //***************************************************************************** */
-$result = DB::table('users')
-    ->paginate(5, 1);
+/*$result = DB::table('users')
+    ->paginate(5, 1);*/
+
+//***************************************************************************** */
+/*Schema::create('user1', function (Table $table) {
+
+    $table->column('id', 'int')
+          ->primary()
+          ->autoIncrement();
+
+    $table->column('username', 'varchar', 100);
+
+    $table->column('email', 'varchar', 255)
+          ->nullable();
+
+    $table->timestamps();
+
+});*/
+
+//***************************************************************************** */
+//********
+/*Schema::table('user1', function (Table $table) {
+
+     $table->dropColumns(['shail', 'ehail']);
+    // $table->column('shail', 'varchar', 255)
+    //   ->nullable();
+    //   $table->column('ehail', 'varchar', 55)
+    //   ->nullable();
+
+});*/
+
+//***************************************************************************** */
+ use App\Core\Database\Migration\MigrationRepository;
+
+/*$repo = new MigrationRepository();
+
+echo "Repository Ready";*/
+
+//***************************************************************************** */
+//  $repo = new MigrationRepository();
+
+// $repo->log(
+//     '2026_06_03_100000_create_users_table',
+//     1
+// );
+
+// print_r(
+//     $repo->getRan()
+// );
+
+// echo $repo->getLastBatchNumber();
+
+use App\Core\Database\Migration\MigrationLoader;
+
+// $loader = new MigrationLoader();
+
+// echo '<pre>';
+
+// print_r(
+//     $loader->getFiles()
+// );
+
+// print_r(
+//     $loader->getMigrationNames()
+// );
+
+// echo '</pre>';
+// use App\Core\Database\Migration\Migrator;
+// $repository =
+//     new MigrationRepository();
+
+// $loader =
+//     new MigrationLoader();
+
+// $migrator =
+//     new Migrator(
+//         $repository,
+//         $loader
+//     );
+
+// $migrator->migrate();
 
 
- echo "<pre>";
+use App\Core\Database\Migration\MigrationManager;
 
- print_r($result);
+// $manager = new MigrationManager();
 
- echo "</pre>";
+// $manager->migrate();
+
+// $manager = new MigrationManager();
+
+// $manager->rollback();
+
+// $manager = new MigrationManager();
+
+// echo '<pre>';
+
+// print_r(
+//     $manager->getExecuted()
+// );
+
+// echo '</pre>';
+
+// $manager = new MigrationManager();
+
+// echo '<pre>';
+
+// print_r(
+//     $manager->getPending()
+// );
+
+// echo '</pre>';
+
+$manager = new MigrationManager();
+
+// echo '<pre>';
+
+// print_r(
+//     $manager->status()
+// );
+
+// echo '</pre>';
+
+if ($manager->hasPending()) {
+
+    $manager->migrate();
+}
+
+
+ //echo "<pre>";
+
+ //print_r($result);
+
+ //echo "</pre>";
 
 ?>
