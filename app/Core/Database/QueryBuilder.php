@@ -418,6 +418,7 @@ public static function clearQueryLog(): void
             self::$queryLog[] = [
                     'query' => $query,
                     'params' => $params,
+                    'time' => microtime(true)
                 ]; // ***HERE AN MODIFACTION IS REQUIRED -> NOW RECORDS ONLY AS LOG THE LAST STATEMENT (THE NEW MODIFICATION -> TO RECORD ALL THE STATEMENTS THAT HAS BEEN IMPLEMENTED) ****
     // *********************************************************************
             $stmt->execute($params);

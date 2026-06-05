@@ -4,6 +4,8 @@ namespace App\Core\Database;
 
 use App\Core\Database\Exceptions\DatabaseException;
 
+use App\Core\Database\ForeignKey;
+
 
 class Table
 {
@@ -87,6 +89,34 @@ class Table
             $this->dropColumn($column);
         }
     }
+
+
+// -------- this part below is for foreign Keys ---------------------//
+
+    public function foreign(string $column): ForeignKey
+    {
+        $foreignKey = new ForeignKey($column);
+
+        $this->blueprint->addForeignKey($foreignKey);
+
+        return $foreignKey;
+    }
+
+    public function dropForeign(string $name): void
+    {
+        $this->blueprint->addCommand("DROP FOREIGN KEY {$name}");
+    }
+
+    public function foreignId(string $name): Column
+    {
+        return $this->column($name, 'bigint');
+    }
+
+    
+
+
+
+
 }
 
 ?>

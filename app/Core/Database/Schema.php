@@ -4,12 +4,19 @@ namespace App\Core\Database;
 
 use App\Core\Database\Conncetion;
 
-use PDO;
+use App\Core\Database\Executor;
+
+
 
 class Schema
 {
-    public static function create(string $table, callable $callback): void
+    public static function create(string $table, callable $callback): string
     {
+
+        if (self::tableExists($table)) {
+            return "{$table} : IS EXSIST!";
+        }
+
         $blueprint = new Blueprint($table);
 
         $tableObj = new Table($blueprint);
@@ -18,19 +25,31 @@ class Schema
 
         $sql = $blueprint->toSql();
 
-        $pdo = Conncetion::connect();
+        //$pdo = Conncetion::connect();
 
-        $pdo->exec($sql);
 
+        // echo $sql;
+        //  die();
+
+        Executor::run($sql);
+
+        return "TABLE {$table} CREATED SUCCESSFULLY!";
 
     }
 
 
-    public static function drop(string $table):void
+    public static function drop(string $table):string
     {
-        $pdo = Conncetion::connect();
 
-        $pdo->exec("DROP TABLE IF EXISTS {$table}");
+        if (!self::tableExists($table)) {
+            return "{$table} : IS NOT EXSIST!";
+        }
+
+        $sql = "DROP TABLE IF EXISTS {$table}";
+
+        Executor::run($sql);
+
+        return "{$table} : IS DROPPED SUCCESSFULLY!";
     }
 
 
@@ -44,7 +63,21 @@ class Schema
 
         $sql = $blueprint->toAlterSql();
 
-        Conncetion::connect()->exec($sql);
+        // echo $sql;
+        // die();
+
+        Executor::run($sql);
+    }
+
+    // ------- Table Exsist Check ---------------------------------------
+
+    public static function tableExists(string $table): bool
+    {
+        $sql = "SHOW TABLES LIKE '{$table}'";
+        
+       $result =  Executor::run($sql);
+
+        return $result ? 1 : 0;
     }
 }
 

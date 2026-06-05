@@ -29,15 +29,33 @@ class DB
         self::connection()->rollBack();
     }
 
-    public static function getQueryLog(): array
+    public static function getQueryLog(bool $logsTypeIdentifier = false): array
     {
-        return QueryBuilder::getQueryLog();
+        if($logsTypeIdentifier)
+            {
+                return Executor::getLogs();
+            }
+            else
+             {
+                return QueryBuilder::getQueryLog();
+             }
+    
     }
 
-    public static function clearQueryLog(): void
+    public static function clearQueryLog(bool $logsTypeIdentifier = false): void
     {
-        QueryBuilder::clearQueryLog();
+        if($logsTypeIdentifier)
+            {
+                Executor::clearLogs();
+            }
+        else
+            {
+                QueryBuilder::clearQueryLog();
+            }
+        
     }
+
+   
 }
 
 

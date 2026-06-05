@@ -12,6 +12,8 @@ class Blueprint
     protected string $mode = 'create';
     protected array $commands = [];
 
+    protected array $foreignKeys = [];
+
     public function __construct(string $table)
     {
         $this->table = $table;
@@ -63,6 +65,11 @@ class Blueprint
             }
         }
 
+         foreach ($this->foreignKeys as $foreignKey) {
+
+            $columnsSql[] = $foreignKey->toSql();
+        }
+
         //  echo "<pre>";
         //     echo sprintf('CREATE TABLE %s (%s)', $this->table, implode(', ', $columnsSql));
         //     //print_r($params);
@@ -81,7 +88,16 @@ class Blueprint
             } else {
                 $columnsSql[] = $com;
             }
+            
         }
+
+
+        foreach ($this->foreignKeys as $foreignKey) {
+
+            $columnsSql[] = $foreignKey->toAlterSql();
+        }
+
+       
 
         
         //  echo "<pre>";
@@ -92,6 +108,14 @@ class Blueprint
 
         return sprintf('ALTER TABLE %s %s', $this->table, implode(', ', $columnsSql));
     }
+
+
+    public function addForeignKey(ForeignKey $foreignKey): void
+    {
+        $this->foreignKeys[] = $foreignKey;
+    }
+
+    
 
 
 }

@@ -302,10 +302,53 @@ $manager = new MigrationManager();
 
 // echo '</pre>';
 
-if ($manager->hasPending()) {
+// if ($manager->hasPending()) {
 
-    $manager->migrate();
-}
+//     $manager->migrate();
+// } 
+//***************************************************************************** */
+// Schema::table('pooo', function ($table) {
+
+// //   $table->dropForeign('pooo_ibfk_2');
+//   $table->foreign('user_id')
+//       ->references('id')
+//       ->on('users')
+//       ->name('fk_posts_users');
+// });
+
+//***************************************************************************** */
+// Schema::create('pooo', function ($table) {
+
+//     $table->column('id', 'bigint')
+//           ->autoIncrement()
+//           ->primary();
+
+//     $table->column('user_id', 'int');
+
+//     $table->foreign('user_id')
+//           ->references('id')
+//           ->on('users');
+// });
+//***************************************************************************** */
+echo Schema::create('p3', function ($table) {
+
+    $table->column('id', 'bigint')
+          ->autoIncrement()
+          ->primary();
+
+    $table->foreignId('user_id');
+
+    $table->foreign('user_id')
+          ->references('id')
+          ->on('pooo')
+          ->name('fk_posts3_users')
+          ->onDelete('CASCADE');
+});
+//***************************************************************************** */
+//DB::table('users')->get();
+
+print_r(DB::getQueryLog());
+
 
 
  //echo "<pre>";

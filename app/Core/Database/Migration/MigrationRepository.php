@@ -149,5 +149,23 @@ class MigrationRepository
         return $stmt->fetchAll();
     }
 
+    public function hasRun(string $migration): bool
+    {
+        $pdo = $this->pdo;
+
+        $stmt = $pdo->prepare("
+            SELECT 1
+            FROM migrations 
+            WHERE migration = :migration
+            LIMIT 1
+        ");
+
+        $stmt->execute([
+            'migration' => $migration
+        ]);
+
+        return $stmt->fetch() !== false;
+    }
+
 
 }

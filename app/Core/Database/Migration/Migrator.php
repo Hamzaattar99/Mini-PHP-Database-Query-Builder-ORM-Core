@@ -45,25 +45,21 @@ class Migrator
     /**
      * Execute migration.
      */
-    protected function runMigration(
-        string $migration,
-        int $batch
-    ): void {
+    protected function runMigration(string $migration, int $batch): void 
+    {
 
-        $className =
-            $this->resolveClassName(
-                $migration
-            );
+        $className = $this->resolveClassName($migration);
+
+        if ($this->repository->hasRun($migration)) {
+                return;
+            }
 
         if (!class_exists($className)) {
 
-            throw new \RuntimeException(
-                "Migration class {$className} not found."
-            );
+            throw new \RuntimeException("Migration class {$className} not found.");
         }
 
-        $instance =
-            new $className();
+        $instance = new $className();
 
         $instance->up();
 
