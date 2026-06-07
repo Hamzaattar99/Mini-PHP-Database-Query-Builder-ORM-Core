@@ -330,7 +330,7 @@ $manager = new MigrationManager();
 //           ->on('users');
 // });
 //***************************************************************************** */
-echo Schema::create('p3', function ($table) {
+/*echo Schema::create('p3', function ($table) {
 
     $table->column('id', 'bigint')
           ->autoIncrement()
@@ -343,11 +343,11 @@ echo Schema::create('p3', function ($table) {
           ->on('pooo')
           ->name('fk_posts3_users')
           ->onDelete('CASCADE');
-});
+}); */
 //***************************************************************************** */
 //DB::table('users')->get();
 
-print_r(DB::getQueryLog());
+//print_r(DB::getQueryLog());
 
 
 

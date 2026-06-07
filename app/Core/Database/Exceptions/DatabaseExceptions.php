@@ -1,12 +1,12 @@
-<?php
+<!-- <?php
 
-namespace App\Core\Database\Exceptions;
+// namespace App\Core\Database\Exceptions;
 
-use Exception;
+// use Exception;
 
-class DatabaseException extends Exception
-{
+// class DatabaseException extends Exception
+// {
     
-}
+// }
 
-?>
+?> -->

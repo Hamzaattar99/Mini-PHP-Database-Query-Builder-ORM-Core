@@ -41,7 +41,7 @@ class Conncetion
                 }
                 catch(PDOException $ex)
                 {
-                    throw new DatabaseException("Datebase Connection Failed: " . $ex->getMessage());
+                    throw DatabaseException::connectionError($ex);
                 }
             }
 

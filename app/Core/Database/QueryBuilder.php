@@ -80,7 +80,7 @@ class QueryBuilder
 
             if(!in_array($operator, $allowedOperators))
                 {
-                    throw new DatabaseException("Invalid Operator");
+                    throw DatabaseException::invalidComaprsionOperator("Invalid Comaprsion Operator");
                 }
 
             
@@ -112,7 +112,7 @@ public function orWhere(string $column, string $operator, mixed $value): self
 
             if(!in_array($operator, $allowedOperators))
                 {
-                    throw new DatabaseException("Invalid Operator");
+                     throw DatabaseException::invalidComaprsionOperator("Invalid Comaprsion Operator");
                 }
 
             
@@ -136,7 +136,7 @@ public function orderBy(string $column, string $direction = 'ASC'): self
 
     if(!in_array($direction, ['ASC', 'DESC']))
         {
-            throw new DatabaseException("Invalid Order Direction");
+            throw DatabaseException::invalidComaprsionOperator("Invalid Comaprsion Operator");
         }
 
     
@@ -220,11 +220,7 @@ public function groupBy(
 
 // --------------------------- HAVING COLUMNS ------------------------------------- //
 
-public function having(
-    string $column,
-    string $operator,
-    mixed $value
-): self
+public function having(string $column, string $operator, mixed $value): self
 {
     $allowedOperators = [
         '=',
@@ -235,13 +231,8 @@ public function having(
         '<='
     ];
 
-    if (!in_array(
-        $operator,
-        $allowedOperators
-    )) {
-        throw new DatabaseException(
-            'Invalid Having Operator'
-        );
+    if (!in_array($operator, $allowedOperators)) {
+       throw DatabaseException::invalidComaprsionOperator("Invalid Comaprsion Operator");
     }
 
     $this->having[] = [
@@ -659,7 +650,7 @@ public static function clearQueryLog(): void
     {
         if(!preg_match('/^[a-zA-Z0-9_]+$/', $name))
             {
-                throw new DatabaseException("Invalid indentifier: {$name}");
+                throw DatabaseException::InvalidIndentifier("Invalid Indentifier : {$name}");
             }
     }
 
